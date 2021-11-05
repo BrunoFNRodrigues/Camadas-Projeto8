@@ -6,15 +6,11 @@ import numpy as np
 from numpy.lib.nanfunctions import nancumprod
 import sounddevice as sd
 import matplotlib as plt
-import peakutils 
-#from suaBibSignal import *
-import time 
 import soundfile as sf
 from suaBibSignal import *
 from funcoes_LPF import *
 
 audio, samplerate = sf.read('audio/ac130.wav')
-print(samplerate)
 
 audio = audio*(1/0.15)
 
@@ -44,7 +40,9 @@ plt.show()
 
 
 filtrado = filtro(audio[:88200,0], samplerate, 14000)
-#sd.play(filtrado, samplerate)
+sd.play(filtrado, samplerate)
+sd.wait()
+
 
 t = np.linspace(inicio,fim,numPontos)
 # plot do gravico  áudio vs tempo!
@@ -64,8 +62,8 @@ plt.show()
 y, x = signal.generateSin(14000, 1, duracao, freqDeAmostragem)
 
 X=x+filtrado*x
-#sd.play(X)
-
+sd.play(X, samplerate)
+sd.wait()
 
 plt.plot(t, X)
 plt.title('Audio modulado')
@@ -79,6 +77,6 @@ plt.grid()
 plt.title('Fourier audio modulado')
 plt.show()
 
-sf.write('teste.wav', X, samplerate)
+sf.write('audio/teste.wav', X, samplerate)
 
 
