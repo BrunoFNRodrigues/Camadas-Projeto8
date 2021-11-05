@@ -25,18 +25,12 @@ numPontos = numAmostras
 
 t = np.linspace(inicio,fim,numPontos)
 # plot do gravico  áudio vs tempo!
-plt.title('Audio puro')
+plt.title('Audio normalizado')
 plt.plot(t, audio[:88200,0])
 
 
 signal= signalMeu()
 fs = freqDeAmostragem
-xf, yf = signal.calcFFT(audio[:,0], fs)
-plt.figure("F(y)")
-plt.plot(xf,yf)
-plt.grid()
-plt.title('Fourier audio')
-plt.show()
 
 
 filtrado = filtro(audio[:88200,0], samplerate, 14000)
