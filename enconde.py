@@ -42,6 +42,7 @@ plt.grid()
 plt.title('Fourier audio')
 plt.show()
 
+
 filtrado = filtro(audio[:88200,0], samplerate, 14000)
 #sd.play(filtrado, samplerate)
 
@@ -64,6 +65,12 @@ y, x = signal.generateSin(14000, 1, duracao, freqDeAmostragem)
 
 X=x+filtrado*x
 #sd.play(X)
+
+
+plt.plot(t, X)
+plt.title('Audio modulado')
+plt.show()
+
 
 xf, yf = signal.calcFFT(X, fs)
 plt.figure("F(y)")
