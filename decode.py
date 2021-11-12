@@ -10,11 +10,11 @@ from funcoes_LPF import *
 
 audio, samplerate = sf.read('audio/teste.wav')
 signal= signalMeu()
-duracao = 2
+duracao = 4
 freqDeAmostragem = samplerate
 y, x = signal.generateSin(14000, 1, duracao, freqDeAmostragem)
 
-audio_demo = audio*x
+audio_demo = audio*x[:102665]
 xf, yf = signal.calcFFT(audio_demo, samplerate)
 plt.figure("F(y)")
 plt.plot(xf,yf)

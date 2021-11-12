@@ -15,30 +15,30 @@ audio, samplerate = sf.read('audio/ac130.wav')
 audio = audio*(1/0.15)
 
 freqDeAmostragem = 44100
-duracao = 2
+duracao = 3
 numAmostras = freqDeAmostragem*duracao
 
 
 inicio = 0
-fim = 2
+fim = 4
 numPontos = numAmostras
 
-t = np.linspace(inicio,fim,numPontos)
+t = np.linspace(inicio,fim,numPontos)[:102665]
 # plot do gravico  áudio vs tempo!
 plt.title('Audio normalizado')
-plt.plot(t, audio[:88200,0])
-
+plt.plot(t, audio[:,0])
+plt.show()
 
 signal= signalMeu()
 fs = freqDeAmostragem
 
 
-filtrado = filtro(audio[:88200,0], samplerate, 14000)
+filtrado = filtro(audio[:,0], samplerate, 14000)
 sd.play(filtrado, samplerate)
 sd.wait()
 
 
-t = np.linspace(inicio,fim,numPontos)
+
 # plot do gravico  áudio vs tempo!
 plt.plot(t, filtrado)
 plt.title('Audio filtrado')
@@ -55,7 +55,7 @@ plt.show()
 
 y, x = signal.generateSin(14000, 1, duracao, freqDeAmostragem)
 
-X=x+filtrado*x
+X=x[:102665]+filtrado*x[:102665]
 sd.play(X, samplerate)
 sd.wait()
 
